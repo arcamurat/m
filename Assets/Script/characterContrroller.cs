@@ -7,6 +7,8 @@ public class characterContrroller : MonoBehaviour
 {
 
     Rigidbody2D rigid;
+    Animator animator;
+
     public float speed = 0;
     Vector2 yon;
 
@@ -20,6 +22,7 @@ public class characterContrroller : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -30,7 +33,10 @@ public class characterContrroller : MonoBehaviour
         {
             transform.right = new Vector3(yon.x, 0, 0);
         }
+
         move();
+        animator.SetFloat("speed", yon.magnitude);
+        animator.SetBool("onAir", !onFloor);
     }
 
     private void move()
